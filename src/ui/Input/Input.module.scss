@@ -1,0 +1,26 @@
+.label {
+  position: absolute;
+  top: -20px;
+  left: 15px;
+  color: var(--light-grey);
+}
+
+.input {
+  width: 100%;
+  padding: 10px 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  height: 70px;
+  font-size: 20px;
+  outline: none;
+}
+
+.input:active,
+.input:focus {
+  outline: 2px solid var(--light);
+}
+
+.formGroup {
+  position: relative;
+  width: 100%;
+}

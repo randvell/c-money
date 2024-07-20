@@ -1,0 +1,15 @@
+.list {
+  font-weight: 700;
+  display: flex;
+  gap: 30px;
+}
+
+.link {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.link:hover {
+  color: var(--light);
+}

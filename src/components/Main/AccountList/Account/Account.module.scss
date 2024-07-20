@@ -1,0 +1,43 @@
+.item {
+  display: grid;
+  grid-template-areas:
+    'account account'
+    'balance .'
+    'opened transaction';
+  justify-content: space-between;
+  width: 100%;
+  height: 170px;
+  background: var(--light-dark);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.item:hover {
+  outline: 2px solid var(--light);
+}
+
+.account {
+  grid-area: account;
+}
+
+.balance {
+  grid-area: balance;
+  font-size: 32px;
+  line-height: 43px;
+  color: var(--white);
+}
+
+.openedDate {
+  grid-area: opened;
+}
+
+.transactionDate {
+  grid-area: transaction;
+}
+
+.textBlock {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 3px;
+}

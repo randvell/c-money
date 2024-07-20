@@ -1,0 +1,48 @@
+@import '~normalize.css';
+@import 'vars.scss';
+@import 'fonts.scss';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  font-size: 15px;
+  line-height: 20px;
+  font-family: 'Nunito', sans-serif;
+  background-color: var(--dark);
+  color: var(--white);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: 'Comfortaa', sans-serif;
+  font-weight: 700;
+  margin: 0;
+}
+
+h1 {
+  font-size: 38px;
+}
+
+li,
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit
+}

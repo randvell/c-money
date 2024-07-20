@@ -1,0 +1,69 @@
+.btn {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  padding: 20px;
+  color: white;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1.4;
+  cursor: pointer;
+  z-index: 0;
+  outline: none;
+  border: none;
+  overflow: none;
+  border-radius: 10px;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 10);
+}
+
+.small {
+  max-width: 250px;
+  padding: 12px 5px;
+}
+
+.btn::before,
+.btn::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  transition: opacity 0.3s ease;
+  border-radius: 10px;
+  overflow: none;
+}
+
+.btn::before {
+  background: linear-gradient(to right, #2e00b1 0%, #8100bd 50%, #a400be 100%);
+  opacity: 1;
+}
+
+.btn::after {
+  background: linear-gradient(to right, #a400be 0%, #8100bd 50%, #2e00b1 100%);
+  opacity: 0;
+}
+
+.btn:hover::after {
+  opacity: 1;
+}
+
+.btn:focus::after {
+  background: linear-gradient(to right, #2e00b1 0%, #a400be 50%, #2e00b1 100%);
+  opacity: 1;
+}
+
+.btn:active::before {
+  background: #2e00b1;
+  opacity: 1;
+}
+
+.btn:active::after {
+  opacity: 0;
+}
+
+.btn > span {
+  position: relative;
+  z-index: 1;
+}

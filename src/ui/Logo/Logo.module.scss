@@ -1,0 +1,16 @@
+.block {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.img {
+  height: 100%;
+}
+
+.text {
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 30px;
+}
