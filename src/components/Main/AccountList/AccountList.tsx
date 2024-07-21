@@ -1,26 +1,53 @@
 import style from './AccountList.module.scss';
 
-import {accounts} from '../../../store/accounts/accountsSlice';
 import {Account} from './Account/Account';
 import Text from '../../../ui/Text';
 import TopInfo from '../TopInfo';
+import {useDispatch, useSelector} from 'react-redux';
+import {AppDispatch, RootState} from '../../../store/store';
+import {BarLoader} from 'react-spinners';
+import {useEffect} from 'react';
+import {accountsFetch} from '../../../store/accounts/accountsAction';
 
 export const AccountList: React.FC = () => {
-  console.log(accounts);
+  const dispatch = useDispatch<AppDispatch>();
+  const state = useSelector((state: RootState) => state.accounts);
+  const status = state.status;
+  const accounts = state.list;
+  const error = state.error;
+
+  useEffect(() => {
+    if (status === 'idle') {
+      dispatch(accountsFetch());
+    }
+  }, [status, dispatch]);
+
   return (
     <div className={style.accountContainer}>
       <TopInfo className={style.tableHeading}>
         <h2 className={style.heading}>Мои счета</h2>
-        <div className={style.sortingContainer}>
-          <Text>Сортировка:</Text>
-          <p className={style.sortingType}>По дате</p>
-        </div>
+        {!!accounts.length && (
+          <div className={style.sortingContainer}>
+            <Text>Сортировка:</Text>
+            <p className={style.sortingType}>По дате</p>
+          </div>
+        )}
       </TopInfo>
 
       <ul className={style.list}>
-        {Object.entries(accounts).map(([key, account]) => (
-          <Account key={key} account={account} />
-        ))}
+        {error && <h2>Ошибка при загрузке счетов</h2>}
+
+        {status === 'loading' && (
+          <>
+            <BarLoader color="#b865d6;" />
+            <Text>Загрузка...</Text>
+          </>
+        )}
+
+        {status === 'succeeded' &&
+          accounts.map((account) => (
+            <Account key={account.account} account={account} />
+          ))}
       </ul>
     </div>
   );

@@ -6,11 +6,11 @@ import TopMenu from './TopMenu';
 export const Header = () => {
   console.log();
   return (
-    <header className={style.header}>
+    <div className={style.header}>
       <Container className={style.container}>
         <Logo />
         <TopMenu />
       </Container>
-    </header>
+    </div>
   );
 };

@@ -1,24 +1,16 @@
 import style from './Main.module.scss';
-
-// import LoginForm from './LoginForm';
 import Container from '../Container';
-import AccountControl from './AccountControl';
-import AccountList from './AccountList';
 
 interface Props {
   children?: React.ReactNode;
+  className?: string;
 }
 
-export const Main = ({children}: Props) => {
+export const Main = ({children, className = ''}: Props) => {
   console.log();
   return (
-    <main className={style.main}>
-      <Container className={style.container}>
-        <AccountControl />
-        <AccountList />
-        {/* <LoginForm /> */}
-        {/* children */}
-      </Container>
-    </main>
+    <div className={`${style.main} ${className}`}>
+      <Container className={style.container}>{children}</Container>
+    </div>
   );
 };

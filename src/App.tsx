@@ -1,16 +1,28 @@
-import style from './App.module.scss';
-import Footer from './components/Footer';
-import Header from './components/Header';
-import Main from './components/Main';
+import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import Layout from './components/Layout';
+import ProtectedRoute from './components/ProtectedRoute';
+import AccountsPage from './pages/AccountsPage';
+import AuthPage from './pages/AuthPage';
+import NotFoundPage from './pages/NotFoundPage';
 
-function App() {
+const App: React.FC = () => {
   return (
-    <div className={style.container}>
-      <Header />
-      <Main />
-      <Footer />
-    </div>
+    <Router>
+      <Routes>
+        {/* Не придумал как сделать чтобы блоки в Main центрировались только в каком-то месте */}
+        <Route element={<Layout centered={true} />}>
+          <Route path="/auth" element={<AuthPage />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Route>
+
+        <Route element={<Layout />}>
+          <Route element={<ProtectedRoute />}>
+            <Route path="/accounts" element={<AccountsPage />} />
+          </Route>
+        </Route>
+      </Routes>
+    </Router>
   );
-}
+};
 
 export default App;

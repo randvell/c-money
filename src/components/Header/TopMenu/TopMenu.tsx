@@ -1,21 +1,35 @@
 import style from './TopMenu.module.scss';
 
+import {Link} from 'react-router-dom';
+import {useDispatch, useSelector} from 'react-redux';
+import {logout} from '../../../store/auth/authSlice';
+import {RootState} from '../../../store/store';
+
 export const TopMenu = () => {
-  console.log();
+  const dispatch = useDispatch();
+  const handleLogout = () => {
+    dispatch(logout());
+  };
+
+  const token = useSelector((state: RootState) => state.auth.token);
+  if (!token) {
+    return <></>;
+  }
+
   return (
     <ul className={style.list}>
       <li className={style.item}>
-        <a className={style.link} href="#a">
+        <Link className={style.link} to="/accounts">
           Счета
-        </a>
+        </Link>
       </li>
       <li className={style.item}>
-        <a className={style.link} href="#b">
+        <Link className={style.link} to="/exchange">
           Обмен
-        </a>
+        </Link>
       </li>
-      <li className={style.item}>
-        <a className={style.link} href="#c">
+      <li className={style.item} onClick={handleLogout}>
+        <button className={`${style.link} ${style.linkBtn}`}>
           <span>Выйти</span>
           <svg
             width="14"
@@ -29,7 +43,7 @@ export const TopMenu = () => {
               fill="currentColor"
             />
           </svg>
-        </a>
+        </button>
       </li>
     </ul>
   );

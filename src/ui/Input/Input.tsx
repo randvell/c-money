@@ -23,6 +23,7 @@ export const Input = ({
       </label>
       <input
         className={`${style.input} ${className}`}
+        name={name}
         type={type}
         value={text}
         onChange={(e) => setText(e.target.value)}

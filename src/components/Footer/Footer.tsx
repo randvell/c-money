@@ -5,11 +5,11 @@ import style from './Footer.module.scss';
 export const Footer = () => {
   console.log();
   return (
-    <footer className={style.footer}>
+    <div className={style.footer}>
       <Container className={style.container}>
         <Logo />
         <span>© C-Money, 2022</span>
       </Container>
-    </footer>
+    </div>
   );
 };

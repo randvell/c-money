@@ -2,16 +2,16 @@
 @import 'vars.scss';
 @import 'fonts.scss';
 
+html,
+body {
+  margin: 0;
+  height: 100%;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
-
-html,
-body,
-#root {
-  height: 100%;
 }
 
 body {
@@ -44,5 +44,11 @@ ul {
 
 a {
   text-decoration: none;
-  color: inherit
+  color: inherit;
+}
+
+#root {
+  height: 100%;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
 }
