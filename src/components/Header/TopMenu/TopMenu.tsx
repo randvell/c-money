@@ -13,7 +13,11 @@ export const TopMenu = () => {
 
   const token = useSelector((state: RootState) => state.auth.token);
   if (!token) {
-    return <></>;
+    return (
+      <Link className={style.link} to="/auth">
+        Авторизация
+      </Link>
+    );
   }
 
   return (

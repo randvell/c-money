@@ -7,7 +7,6 @@ interface Props {
 }
 
 export const Main = ({children, className = ''}: Props) => {
-  console.log();
   return (
     <div className={`${style.main} ${className}`}>
       <Container className={style.container}>{children}</Container>

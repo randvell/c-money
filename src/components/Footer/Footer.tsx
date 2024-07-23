@@ -3,7 +3,6 @@ import Container from '../Container';
 import style from './Footer.module.scss';
 
 export const Footer = () => {
-  console.log();
   return (
     <div className={style.footer}>
       <Container className={style.container}>

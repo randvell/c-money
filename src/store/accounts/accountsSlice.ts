@@ -23,7 +23,6 @@ const accountsSlice = createSlice({
       state.error = null;
     });
     builder.addCase(accountsFetch.fulfilled, (state, action) => {
-      console.log(action, action.payload);
       state.status = 'succeeded';
       state.list = action.payload;
     });

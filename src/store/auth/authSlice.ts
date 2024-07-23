@@ -17,6 +17,13 @@ const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
+    initStorage(state) {
+      const token = localStorage.getItem('token');
+      if (token) {
+        state.token = token;
+        state.status = 'succeeded';
+      }
+    },
     logout(state) {
       state.token = null;
       state.status = 'idle';
@@ -42,6 +49,6 @@ const authSlice = createSlice({
   },
 });
 
-export const {logout} = authSlice.actions;
+export const {logout, initStorage} = authSlice.actions;
 
 export default authSlice.reducer;

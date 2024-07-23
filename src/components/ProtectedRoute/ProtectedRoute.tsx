@@ -4,18 +4,19 @@ import {RootState} from '../../store/store';
 import {useEffect} from 'react';
 
 export const ProtectedRoute: React.FC = () => {
-  const token = useSelector((state: RootState) => state.auth.token);
+  const {token, status} = useSelector((state: RootState) => state.auth);
   const navigate = useNavigate();
   const location = useLocation();
 
-  console.log('token', token);
-  console.log('path', location.pathname);
-
   useEffect(() => {
-    if (!token && location.pathname !== '/auth') {
+    if (
+      !token &&
+      location.pathname !== '/auth' &&
+      ['succeeded', 'failed'].includes(status)
+    ) {
       navigate('/auth', {replace: true});
     }
-  }, [token, location.pathname, navigate]);
+  }, [token, status, location.pathname, navigate]);
 
   if (!token && location.pathname !== '/auth') {
     return null;
