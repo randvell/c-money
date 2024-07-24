@@ -1,7 +1,7 @@
 import style from './Button.module.scss';
 
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  children: string;
+  children: React.ReactNode;
   className?: string;
   size?: 'small' | 'normal';
 }

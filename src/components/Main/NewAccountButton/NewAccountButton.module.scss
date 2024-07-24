@@ -1,0 +1,13 @@
+.container {
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  max-width: 350px;
+}
+
+.error {
+  color: var(--red);
+  position: absolute;
+  top: -30px;
+}

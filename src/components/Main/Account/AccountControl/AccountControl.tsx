@@ -1,12 +1,11 @@
+import NewAccountButton from '../../NewAccountButton';
+import TopInfo from '../../TopInfo';
 import style from './AccountControl.module.scss';
-
-import TopInfo from '../TopInfo';
-import NewAccountButton from '../NewAccountButton';
 
 export const AccountControl = () => {
   return (
     <TopInfo className={style.block}>
-      <h1>Здравствуйте, %username%!</h1>
+      <h1 className={style.heading}>Здравствуйте, %username%!</h1>
       <NewAccountButton />
     </TopInfo>
   );

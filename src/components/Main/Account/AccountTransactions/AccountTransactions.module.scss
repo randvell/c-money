@@ -1,0 +1,45 @@
+.container {
+  position: relative;
+}
+
+.heading {
+  position: absolute;
+  left: 0px;
+  top: -30px;
+}
+
+.table {
+  width: 100%;
+  background: var(--light-dark);
+  border-radius: 10px;
+  border-collapse: separate;
+  border-spacing: 0;
+  padding: 10px;
+}
+
+.table td,
+.table th {
+  padding: 10px;
+  border-left: 1px solid var(--dark);
+}
+
+.table th {
+  padding: 10px;
+  border-bottom: 1px solid var(--dark);
+}
+
+.table th:first-child,
+.table td:first-child {
+  border-left: none;
+  padding: 0 10px 0 0;
+}
+
+.thead {
+  color: var(--light-grey);
+  font-weight: 400;
+  text-align: left;
+}
+
+.spendingTransaction {
+  color: var(--light);
+}

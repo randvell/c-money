@@ -1,13 +1,13 @@
 import style from './AccountList.module.scss';
 
 import {Account} from './Account/Account';
-import Text from '../../../ui/Text';
-import TopInfo from '../TopInfo';
+import Text from '../../../../ui/Text';
+import TopInfo from '../../TopInfo';
 import {useDispatch, useSelector} from 'react-redux';
-import {AppDispatch, RootState} from '../../../store/store';
+import {AppDispatch, RootState} from '../../../../store/store';
 import {BarLoader} from 'react-spinners';
 import {useEffect} from 'react';
-import {accountsFetch} from '../../../store/accounts/accountsAction';
+import {accountsFetch} from '../../../../store/accounts/accountsAction';
 
 export const AccountList: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -39,7 +39,7 @@ export const AccountList: React.FC = () => {
 
         {status === 'loading' && (
           <>
-            <BarLoader color="#b865d6;" />
+            <BarLoader color="#b865d6" />
             <Text>Загрузка...</Text>
           </>
         )}

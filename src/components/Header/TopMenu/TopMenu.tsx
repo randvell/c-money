@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import {logout} from '../../../store/auth/authSlice';
 import {RootState} from '../../../store/store';
+import PageLink from '../../../ui/PageLink';
 
 export const TopMenu = () => {
   const dispatch = useDispatch();
@@ -23,14 +24,14 @@ export const TopMenu = () => {
   return (
     <ul className={style.list}>
       <li className={style.item}>
-        <Link className={style.link} to="/accounts">
+        <PageLink className={style.link} to="/accounts">
           Счета
-        </Link>
+        </PageLink>
       </li>
       <li className={style.item}>
-        <Link className={style.link} to="/exchange">
+        <PageLink className={style.link} to="/exchange">
           Обмен
-        </Link>
+        </PageLink>
       </li>
       <li className={style.item} onClick={handleLogout}>
         <button className={`${style.link} ${style.linkBtn}`}>

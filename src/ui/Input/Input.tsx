@@ -1,5 +1,6 @@
-import {useState} from 'react';
 import style from './Input.module.scss';
+
+import {useState} from 'react';
 
 interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   className?: string;

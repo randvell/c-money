@@ -19,7 +19,7 @@ export interface IAccount {
 }
 
 export const accountsFetch = createAsyncThunk(
-  'accounts',
+  'accounts/fetch',
   async (_, {getState, rejectWithValue}) => {
     try {
       const state = getState() as RootState;
@@ -54,7 +54,7 @@ export const accountsFetch = createAsyncThunk(
 );
 
 export const accountCreate = createAsyncThunk(
-  'account/create',
+  'accounts/create',
   async (_, {getState, rejectWithValue}) => {
     try {
       const state = getState() as RootState;
@@ -63,7 +63,7 @@ export const accountCreate = createAsyncThunk(
         return rejectWithValue('Необходимо авторизоваться');
       }
 
-      const url = `${API_URL}/create`;
+      const url = `${API_URL}/create-account`;
       const response = await axios.post(
         url,
         {},
