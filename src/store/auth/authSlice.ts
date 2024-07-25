@@ -1,15 +1,16 @@
 import {createSlice} from '@reduxjs/toolkit';
 import {loginFetch} from './authAction';
+import {ActionState} from '../cont';
 
 export interface AuthState {
   token: string | null;
-  status: 'idle' | 'loading' | 'succeeded' | 'failed';
+  status: ActionState;
   error: string | null;
 }
 
 const initialState: AuthState = {
   token: null,
-  status: 'idle',
+  status: ActionState.Idle,
   error: null,
 };
 
@@ -21,12 +22,12 @@ const authSlice = createSlice({
       const token = localStorage.getItem('token');
       if (token) {
         state.token = token;
-        state.status = 'succeeded';
+        state.status = ActionState.Succeeded;
       }
     },
     logout(state) {
       state.token = null;
-      state.status = 'idle';
+      state.status = ActionState.Idle;
       state.error = null;
       localStorage.removeItem('token');
     },
@@ -34,16 +35,16 @@ const authSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(loginFetch.pending, (state) => {
-        state.status = 'loading';
+        state.status = ActionState.Loading;
         state.error = null;
       })
       .addCase(loginFetch.fulfilled, (state, action) => {
-        state.status = 'succeeded';
+        state.status = ActionState.Succeeded;
         state.token = action.payload;
         localStorage.setItem('token', action.payload);
       })
       .addCase(loginFetch.rejected, (state, action) => {
-        state.status = 'failed';
+        state.status = ActionState.Failed;
         state.error = action.payload as string;
       });
   },

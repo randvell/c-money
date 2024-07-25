@@ -23,8 +23,8 @@ export const AccountTransactions = ({account}: Props) => {
           </tr>
         </thead>
         <tbody>
-          {transactions.map((transaction) => (
-            <tr>
+          {transactions.map((transaction, i) => (
+            <tr key={i}>
               <td>{transaction.to}</td>
               <td
                 className={

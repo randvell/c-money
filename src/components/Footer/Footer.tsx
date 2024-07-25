@@ -7,7 +7,7 @@ export const Footer = () => {
     <div className={style.footer}>
       <Container className={style.container}>
         <Logo />
-        <span>© C-Money, 2022</span>
+        <span>© C-Money, 2024</span>
       </Container>
     </div>
   );

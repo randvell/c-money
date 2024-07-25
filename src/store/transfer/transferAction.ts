@@ -1,24 +1,37 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
-import axios from 'axios';
 import {RootState} from '../store';
+import axios from 'axios';
 import {API_URL} from '../../const';
 
-interface ILoginFetch {
-  login: string;
-  password: string;
+interface IRequest {
+  from: string;
+  to: string;
+  amount: number;
 }
 
-export const loginFetch = createAsyncThunk(
-  'auth/login',
-  async ({login, password}: ILoginFetch, {getState, rejectWithValue}) => {
+export const transferFunds = createAsyncThunk(
+  'transfer-funds',
+  async ({from, to, amount}: IRequest, {getState, rejectWithValue}) => {
     try {
       const state = getState() as RootState;
       const token = state.auth.token;
-      if (token) {
-        return rejectWithValue('Вы уже авторизованы');
+      if (!token) {
+        return rejectWithValue('Вы не авторизованы');
       }
 
-      const response = await axios.post(`${API_URL}/login`, {login, password});
+      const response = await axios.post(
+        `${API_URL}/transfer-funds`,
+        {
+          from,
+          to,
+          amount,
+        },
+        {
+          headers: {
+            Authorization: `Basic ${token}`,
+          },
+        }
+      );
       const {payload, error} = response.data;
       if (error) {
         return rejectWithValue(error);

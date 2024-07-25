@@ -35,8 +35,8 @@ export const LoginForm = () => {
       <form className={style.form} onSubmit={handleSubmit}>
         <h1 className={style.header}>Вход в аккаунт</h1>
 
-        <Input name="login" label="Логин" />
-        <Input name="password" label="Пароль" type="password" />
+        <Input name="login" label="Логин" required />
+        <Input name="password" label="Пароль" type="password" required />
 
         <Button type="submit" disabled={status === 'loading'}>
           {status === 'loading' ? 'Загрузка...' : 'Войти'}
