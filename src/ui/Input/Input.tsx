@@ -91,18 +91,21 @@ export const Select = ({
   };
 
   return (
-    <select
-      className={`${style.input} ${className} ${style[`i-${fieldSize}`]}`}
-      name={name}
-      value={selected}
-      onChange={handleChange}
-    >
-      <option value="">--Select option--</option>
-      {options.map(({key, value}) => (
-        <option key={key} value={value}>
-          {key}
-        </option>
-      ))}
-    </select>
+    <div className={style.formGroup}>
+      <p className={style.label}>{label}</p>
+      <select
+        className={`${style.input} ${className} ${style[`i-${fieldSize}`]}`}
+        name={name}
+        value={selected}
+        onChange={handleChange}
+      >
+        <option value="">--Select option--</option>
+        {options.map(({key, value}) => (
+          <option key={key} value={value}>
+            {key}
+          </option>
+        ))}
+      </select>
+    </div>
   );
 };

@@ -27,6 +27,14 @@ export const ExchangeForm = () => {
       amount: Number(formData.get('amount')),
     };
 
+    if (Number.isNaN(requestData.amount)) {
+      setValidationError('Введите корректную сумму');
+      return;
+    }
+    if (requestData.amount <= 0) {
+      setValidationError('Сумма не может быть меньше или равна нулю');
+      return;
+    }
     if (!requestData.to || !requestData.from) {
       setValidationError('Не заполнены обязательные поля');
       return;
@@ -61,23 +69,15 @@ export const ExchangeForm = () => {
         />
         <Input name="amount" label="Сумма" fieldSize="small" required />
 
-        <div className={style.btnContainer}>
-          {(exchangeError || validationError) && (
-            <span className={style.error}>
-              {exchangeError || validationError}
-            </span>
-          )}
+        <span className={style.error}>{exchangeError || validationError}</span>
 
-          <Button
-            size="small"
-            className={style.button}
-            disabled={exchangeStatus === ActionState.Loading}
-          >
-            {exchangeStatus === ActionState.Loading
-              ? 'Загрузка...'
-              : 'Обменять'}
-          </Button>
-        </div>
+        <Button
+          size="small"
+          className={style.button}
+          disabled={exchangeStatus === ActionState.Loading}
+        >
+          {exchangeStatus === ActionState.Loading ? 'Загрузка...' : 'Обменять'}
+        </Button>
       </div>
     </form>
   );
