@@ -5,6 +5,13 @@
   color: var(--light-grey);
 }
 
+.error {
+  position: absolute;
+  top: -20px;
+  right: 15px;
+  color: var(--red);
+}
+
 .input {
   width: 100%;
   padding: 10px 20px;

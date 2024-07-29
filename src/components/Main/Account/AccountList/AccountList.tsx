@@ -1,23 +1,26 @@
 import style from './AccountList.module.scss';
 
+import React, {useEffect} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import {BarLoader} from 'react-spinners';
 import {Account} from './Account/Account';
 import Text from '../../../../ui/Text';
 import TopInfo from '../../TopInfo';
-import {useDispatch, useSelector} from 'react-redux';
 import {AppDispatch, RootState} from '../../../../store/store';
-import {BarLoader} from 'react-spinners';
-import {useEffect} from 'react';
 import {accountsFetch} from '../../../../store/accounts/accountsAction';
+import {ActionState} from '../../../../store/cont';
+import {selectSortedAccounts} from '../../../../store/accounts/accountsSelector';
+import AccountSorting from './AccountSorting';
 
 export const AccountList: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const state = useSelector((state: RootState) => state.accounts);
   const status = state.status;
-  const accounts = state.list;
   const error = state.error;
+  const sortedAccounts = useSelector(selectSortedAccounts);
 
   useEffect(() => {
-    if (status === 'idle') {
+    if (status === ActionState.Idle) {
       dispatch(accountsFetch());
     }
   }, [status, dispatch]);
@@ -26,18 +29,13 @@ export const AccountList: React.FC = () => {
     <div className={style.accountContainer}>
       <TopInfo className={style.tableHeading}>
         <h2 className={style.heading}>Мои счета</h2>
-        {!!accounts.length && (
-          <div className={style.sortingContainer}>
-            <Text>Сортировка:</Text>
-            <p className={style.sortingType}>По дате</p>
-          </div>
-        )}
+        <AccountSorting />
       </TopInfo>
 
       <ul className={style.list}>
         {error && <h2>Ошибка при загрузке счетов: {error}</h2>}
 
-        {status === 'loading' && (
+        {status === ActionState.Loading && (
           <>
             <BarLoader color="#b865d6" />
             <Text>Загрузка...</Text>
@@ -45,7 +43,7 @@ export const AccountList: React.FC = () => {
         )}
 
         {status === 'succeeded' &&
-          accounts.map((account) => (
+          sortedAccounts.map((account) => (
             <Account key={account.account} account={account} />
           ))}
       </ul>

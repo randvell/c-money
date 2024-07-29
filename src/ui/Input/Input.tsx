@@ -6,6 +6,7 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   className?: string;
   name: string;
   label: string;
+  mask?: null | RegExp;
   fieldSize?: 'big' | 'normal' | 'small';
 }
 
@@ -15,21 +16,48 @@ export const Input = ({
   label,
   type = 'text',
   fieldSize = 'normal',
+  mask = null,
   ...props
 }: InputProps) => {
   const [text, setText] = useState('');
+  const [error, setError] = useState('');
+  const [typingTimeout, setTypingTimeout] = useState<NodeJS.Timeout | null>(
+    null
+  );
+
+  const validateText = (value: string) => {
+    if (mask && !mask.test(value)) {
+      setError('Некорректный ввод');
+    } else {
+      setError('');
+    }
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const currentText = e.target.value;
+    setText(currentText);
+    setError('');
+
+    if (typingTimeout) {
+      clearTimeout(typingTimeout);
+    }
+
+    const timeoutId = setTimeout(() => validateText(currentText), 300);
+    setTypingTimeout(timeoutId);
+  };
 
   return (
     <div className={`${style.formGroup}`}>
       <label className={style.label} htmlFor={name}>
         {label}
       </label>
+      <p className={style.error}>{error}</p>
       <input
         className={`${style.input} ${className} ${style[`i-${fieldSize}`]}`}
         name={name}
         type={type}
         value={text}
-        onChange={(e) => setText(e.target.value)}
+        onChange={handleChange}
         {...props}
       />
     </div>

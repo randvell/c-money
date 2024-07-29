@@ -6,6 +6,7 @@ import {FormEvent, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppDispatch, RootState} from '../../../store/store';
 import {loginFetch} from '../../../store/auth/authAction';
+import {ActionState} from '../../../store/cont';
 
 export const LoginForm = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -35,12 +36,19 @@ export const LoginForm = () => {
       <form className={style.form} onSubmit={handleSubmit}>
         <h1 className={style.header}>Вход в аккаунт</h1>
 
-        <Input name="login" label="Логин" fieldSize="big" required />
+        <Input
+          name="login"
+          label="Логин"
+          fieldSize="big"
+          mask={/^[a-zA-Z]{6,}$/}
+          required
+        />
         <Input
           name="password"
           label="Пароль"
           type="password"
           fieldSize="big"
+          mask={/^[a-zA-Z]{6,}$/}
           required
         />
 
@@ -48,9 +56,11 @@ export const LoginForm = () => {
           className={style.btn}
           size="big"
           type="submit"
-          disabled={status === 'loading'}
+          disabled={status === ActionState.Loading}
         >
-          {status === 'loading' ? 'Загрузка...' : 'Войти'}
+          {status === ActionState.Loading && 'Загрузка...'}
+          {status === ActionState.Succeeded && 'Успешно'}
+          {status === ActionState.Failed && 'Войти'}
         </Button>
 
         {(error || validationError) && (
