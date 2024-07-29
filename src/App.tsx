@@ -9,6 +9,7 @@ import {RootState} from './store/store';
 import {useEffect} from 'react';
 import {initStorage} from './store/auth/authSlice';
 import AccountPage from './pages/AccountPage';
+import ExchangePage from './pages/ExchangePage';
 
 const App: React.FC = () => {
   const token = useSelector((state: RootState) => state.auth.token);
@@ -23,7 +24,7 @@ const App: React.FC = () => {
   return (
     <Router>
       <Routes>
-        {/* Не придумал как сделать чтобы блоки в Main центрировались по какому-то условию внутри */}
+        {/* Пока не придумал как сделать чтобы блоки в Main центрировались по какому-то условию внутри */}
         <Route element={<Layout centered={true} />}>
           <Route path="/auth" element={<AuthPage />} />
           <Route path="*" element={<NotFoundPage />} />
@@ -34,6 +35,7 @@ const App: React.FC = () => {
             <Route path="/" element={<AccountsPage />} />
             <Route path="/accounts" element={<AccountsPage />} />
             <Route path="/accounts/:id" element={<AccountPage />} />
+            <Route path="/exchange" element={<ExchangePage />} />
           </Route>
         </Route>
       </Routes>

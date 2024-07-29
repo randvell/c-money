@@ -35,7 +35,7 @@ export const AccountList: React.FC = () => {
       </TopInfo>
 
       <ul className={style.list}>
-        {error && <h2>Ошибка при загрузке счетов</h2>}
+        {error && <h2>Ошибка при загрузке счетов: {error}</h2>}
 
         {status === 'loading' && (
           <>

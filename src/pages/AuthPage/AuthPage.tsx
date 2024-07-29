@@ -14,7 +14,7 @@ export const AuthPage = () => {
 
   useEffect(() => {
     if (token && path === '/auth') {
-      navigate('/accounts/ooooo', {replace: true});
+      navigate('/accounts', {replace: true});
     }
   }, [token, path, navigate]);
 

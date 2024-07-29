@@ -1,0 +1,6 @@
+.exchangeContainer {
+display: grid;
+grid-auto-flow: row;
+grid-template-columns: 1fr 1fr;
+gap: 40px
+}

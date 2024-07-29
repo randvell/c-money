@@ -20,7 +20,6 @@ export const NewAccountButton = () => {
   return (
     <div className={style.container}>
       <Button
-        size="small"
         onClick={handleClick}
         disabled={createStatus !== ActionState.Idle}
       >

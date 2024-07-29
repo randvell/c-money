@@ -24,3 +24,17 @@
   position: relative;
   width: 100%;
 }
+
+.i-small {
+  max-height: 37px;
+  font-size: 14px;
+  padding: 5px 20px;
+}
+
+.i-normal {
+  max-height: 49px;
+}
+
+.i-big {
+  max-height: 70px;
+}

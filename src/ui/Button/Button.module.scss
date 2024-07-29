@@ -1,8 +1,10 @@
 .btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   max-width: 350px;
   position: relative;
-  display: inline-block;
-  width: 100%;
   padding: 20px 30px;
   color: white;
   font-weight: 700;
@@ -16,9 +18,16 @@
   box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 10);
 }
 
-.small {
-  max-width: 250px;
-  padding: 12px 5px;
+.b-small {
+  height: 37px;
+}
+
+.b-normal {
+  height: 49px;
+}
+
+.b-big {
+  height: 70px;
 }
 
 .btn::before,

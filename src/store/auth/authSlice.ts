@@ -23,6 +23,8 @@ const authSlice = createSlice({
       if (token) {
         state.token = token;
         state.status = ActionState.Succeeded;
+      } else {
+        state.status = ActionState.Failed;
       }
     },
     logout(state) {

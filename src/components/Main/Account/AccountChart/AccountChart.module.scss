@@ -1,5 +1,7 @@
 .container {
-  padding: 10px;
+  grid-area: chart;
+  padding: 20px;
   border-radius: 10px;
   background: var(--light-dark);
+  width: 100%;
 }

@@ -17,6 +17,7 @@ export const AccountTransferForm = () => {
   const [validationError, setValidationError] = useState('');
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setValidationError('');
 
     const formData = new FormData(e.currentTarget);
     const requestData = {
@@ -48,13 +49,14 @@ export const AccountTransferForm = () => {
       </TopInfo>
 
       <form className={style.form} onSubmit={handleSubmit}>
-        <Input name="account" label="Счет" required />
-        <Input name="amount" label="Сумма" required />
+        <Input fieldSize="big" name="account" label="Счет" required />
+        <Input fieldSize="big" name="amount" label="Сумма" required />
         <div className={style.btnContainer}>
           {(error || validationError) && (
             <span className={style.error}>{error || validationError}</span>
           )}
           <Button
+            size="big"
             className={style.button}
             disabled={status === ActionState.Loading}
           >

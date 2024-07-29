@@ -8,7 +8,7 @@ interface Props {
 }
 
 export const AccountTransactions = ({account}: Props) => {
-  const transactions = account.transactions || [];
+  const transactions = (account.transactions || []).slice(-9);
 
   return (
     <div className={style.container}>
@@ -28,10 +28,14 @@ export const AccountTransactions = ({account}: Props) => {
               <td>{transaction.to}</td>
               <td
                 className={
-                  transaction.amount > 0 ? style.spendingTransaction : ''
+                  transaction.to !== account.account
+                    ? style.spendingTransaction
+                    : ''
                 }
               >
-                {`${transaction.amount > 0 ? '-' : '+'}${transaction.amount}`}
+                {`${transaction.to !== account.account ? '-' : '+'}${
+                  transaction.amount
+                }`}
               </td>
               <td>{formatDateShort(transaction.date)}</td>
             </tr>
