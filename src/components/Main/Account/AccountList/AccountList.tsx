@@ -14,16 +14,16 @@ import AccountSorting from './AccountSorting';
 
 export const AccountList: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const state = useSelector((state: RootState) => state.accounts);
-  const status = state.status;
-  const error = state.error;
+  const {status, error} = useSelector((state: RootState) => state.accounts);
+  const {status: authStatus} = useSelector((state: RootState) => state.auth);
+  const authSuccess = authStatus === ActionState.Succeeded;
   const sortedAccounts = useSelector(selectSortedAccounts);
 
   useEffect(() => {
-    if (status === ActionState.Idle) {
+    if (authSuccess) {
       dispatch(accountsFetch());
     }
-  }, [status, dispatch]);
+  }, [authSuccess, dispatch]);
 
   return (
     <div className={style.accountContainer}>
