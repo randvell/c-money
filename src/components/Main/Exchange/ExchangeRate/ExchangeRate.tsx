@@ -13,10 +13,7 @@ export const ExchangeRate = () => {
   const rates = useSelector((state: RootState) => state.exchange.rates);
 
   useEffect(() => {
-    const url = `ws://${API_URL.replace('https://', '').replace(
-      'http://',
-      ''
-    )}/currency-feed`;
+    const url = `${API_URL.replace('http', 'ws')}/currency-feed`;
 
     console.log(url);
     const ws = new WebSocket(url);
