@@ -142,6 +142,9 @@ export const transferFunds = createAsyncThunk(
       if (!token) {
         return rejectWithValue('Вы не авторизованы');
       }
+      if (from === to) {
+        return rejectWithValue('Вы не можете отправить средства самому себе');
+      }
 
       const response = await axios.post(
         `${API_URL}/transfer-funds`,

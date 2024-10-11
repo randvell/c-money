@@ -38,7 +38,7 @@ export const ExchangeBalance = () => {
                 <Text>{details.code}</Text>
               </td>
               <td className={style.amount}>
-                {Math.round(details.amount * 100)}
+                {Math.round(details.amount * 100) / 100}
               </td>
             </tr>
           ))}

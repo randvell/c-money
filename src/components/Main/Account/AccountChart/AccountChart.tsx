@@ -27,49 +27,56 @@ const russianMonths = [
   'Ноябрь',
   'Декабрь',
 ];
-
 const processTransactions = (
   account: string,
   initialBalance: number,
   transactions: ITransaction[]
 ): BalanceData[] => {
-  transactions.sort(
-    (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
-  );
+  if (transactions.length === 0) {
+    return [];
+  }
 
   const balanceData: BalanceData[] = [];
-  let balance = initialBalance;
-  let currentMonth = '';
-  let monthlyBalance = balance;
 
-  transactions.forEach((transaction) => {
+  let balance = initialBalance;
+  let currentDate = new Date();
+  let currentMonth = `${currentDate.getFullYear()}-${String(
+    currentDate.getMonth() + 1
+  ).padStart(2, '0')}`;
+
+  balanceData.push({date: currentMonth, balance: balance});
+
+  transactions.reverse().forEach((transaction) => {
     const transactionDate = new Date(transaction.date);
     const yearMonth = `${transactionDate.getFullYear()}-${String(
       transactionDate.getMonth() + 1
     ).padStart(2, '0')}`;
 
     if (yearMonth !== currentMonth) {
-      if (currentMonth) {
-        balanceData.push({date: currentMonth, balance: monthlyBalance});
+      if (balanceData[0]?.date !== currentMonth) {
+        balanceData.push({date: currentMonth, balance: balance});
       }
+
       currentMonth = yearMonth;
-      monthlyBalance = balance;
     }
 
     if (transaction.from === account) {
-      balance -= transaction.amount;
-    } else {
       balance += transaction.amount;
+    } else {
+      balance -= transaction.amount;
     }
-
-    monthlyBalance = balance;
   });
 
-  if (currentMonth) {
-    balanceData.push({date: currentMonth, balance: monthlyBalance});
-  }
+  const lastTransaction = transactions[transactions.length - 1];
+  let lastTransactionDate = new Date(lastTransaction.date);
+  lastTransactionDate.setMonth(lastTransactionDate.getMonth());
+  const yearMonth = `${lastTransactionDate.getFullYear()}-${String(
+    lastTransactionDate.getMonth() + 1
+  ).padStart(2, '0')}`;
 
-  return balanceData;
+  balanceData.push({date: yearMonth, balance: 0});
+
+  return balanceData.reverse();
 };
 
 export const AccountChart: React.FC = () => {

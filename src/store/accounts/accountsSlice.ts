@@ -97,6 +97,7 @@ const accountsSlice = createSlice({
       state.transferStatus = ActionState.Succeeded;
       if (state.current && action.payload?.transactions) {
         state.current.transactions = action.payload.transactions;
+        state.current.balance = action.payload.balance;
       }
     });
     builder.addCase(transferFunds.rejected, (state, action) => {
